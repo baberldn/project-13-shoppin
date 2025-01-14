@@ -6,7 +6,7 @@ import "./Cart.css";
 function Cart() {
   const { cart = [] } = useContext(GlobalContext);
 
-  // Sepet verilerinin geçerli olup olmadığını kontrol etme
+
   if (!Array.isArray(cart)) {
     return <p>Bir hata oluştu, sepet verileri geçerli değil.</p>;
   }
