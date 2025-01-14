@@ -5,22 +5,19 @@ import "./Checkout.css";
 
 const Checkout = () => {
   const { cart, orders, addItemToOrderList, clearCart } = useContext(GlobalContext);
-  const safeCart = cart || [];
+  const safeCart = cart || []; 
+   const { discount, extraFees, tax } = { discount: 20, extraFees: 99, tax: 5 };
 
-  const { discount, extraFees, tax } = { discount: 20, extraFees: 99, tax: 5 };
 
   const subTotal = Math.floor(safeCart.reduce((sum, curr) => (curr.price ? sum + curr.price : sum), 0)) || 0;
-
   const total = Math.floor(subTotal + extraFees + tax - (subTotal + extraFees + tax) * (discount / 100)) || 0;
 
   const [isOrdered, setIsOrdered] = useState(false);
-
   const handlePay = () => {
     if (!safeCart || safeCart.length === 0) {
       alert("Sepetinizde ürün bulunmamaktadır!");
       return;
     }
-
     addItemToOrderList({
       orderId: orders.length + 1,
       buyerId: 1,
@@ -30,11 +27,10 @@ const Checkout = () => {
       deliveryDate: "28/12/2023",
       isDelivered: false,
     });
-    console.log("Sipariş eklendi");
 
+    console.log("Sipariş eklendi");
     clearCart();
     console.log("Sepet temizlendi");
-
     setIsOrdered(true);
   };
 

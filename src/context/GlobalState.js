@@ -1,29 +1,30 @@
 import React, { createContext, useState } from "react";
-import PropTypes from "prop-types"; 
-
+import PropTypes from "prop-types";
 
 export const GlobalContext = createContext();
 
-
 export const GlobalProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
+  const [orders, setOrders] = useState([]);
 
-  // ürün ekleme 
   const addItemToCartList = (item) => {
-    const isItemInCart = cart.some((cartItem) => cartItem.id === item.id);
+    setCart((prevCart) => [...prevCart, item]);
+  };
 
-    if (!isItemInCart) {
-      setCart((prevCart) => [...prevCart, item]); //değeri alıp güncelleme
-    }
+  const addItemToOrderList = (order) => {
+    setOrders((prevOrders) => [...prevOrders, order]);
+  };
+
+  const clearCart = () => {
+    setCart([]);
   };
 
   return (
-    <GlobalContext.Provider value={{ cart, addItemToCartList }}>
+    <GlobalContext.Provider value={{ cart, orders, addItemToCartList, addItemToOrderList, clearCart }}>
       {children}
     </GlobalContext.Provider>
   );
 };
-
 
 GlobalProvider.propTypes = {
   children: PropTypes.node.isRequired,

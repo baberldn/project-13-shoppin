@@ -8,6 +8,7 @@ import Navbar from "./components/navbar/Navbar";
 import Cart from "./components/cart/Cart";
 import Orders from "./components/orders/Orders";
 import Checkout from "./components/checkout/Checkout";
+import { GlobalProvider } from "./context/GlobalState";
 
 const Layout = ({ children }) => (
   <div>
@@ -16,7 +17,6 @@ const Layout = ({ children }) => (
   </div>
 );
 
-
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
 };
@@ -24,50 +24,52 @@ Layout.propTypes = {
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Layout>
-                <HomePage />
-              </Layout>
-            }
-          />
-          <Route
-            path="/item/:id"
-            element={
-              <Layout>
-                <ItemDetail />
-              </Layout>
-            }
-          />
-          <Route
-            path="/cart"
-            element={
-              <Layout>
-                <Cart />
-              </Layout>
-            }
-          />
-          <Route
-            path="/orders"
-            element={
-              <Layout>
-                <Orders />
-              </Layout>
-            }
-          />
-          <Route
-            path="/checkout"
-            element={
-              <Layout>
-                <Checkout />
-              </Layout>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
+      <GlobalProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Layout>
+                  <HomePage />
+                </Layout>
+              }
+            />
+            <Route
+              path="/item/:id"
+              element={
+                <Layout>
+                  <ItemDetail />
+                </Layout>
+              }
+            />
+            <Route
+              path="/cart"
+              element={
+                <Layout>
+                  <Cart />
+                </Layout>
+              }
+            />
+            <Route
+              path="/orders"
+              element={
+                <Layout>
+                  <Orders />
+                </Layout>
+              }
+            />
+            <Route
+              path="/checkout"
+              element={
+                <Layout>
+                  <Checkout />
+                </Layout>
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+      </GlobalProvider>
     </div>
   );
 }
