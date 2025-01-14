@@ -8,7 +8,8 @@ import Navbar from "./components/navbar/Navbar";
 import Cart from "./components/cart/Cart";
 import Orders from "./components/orders/Orders";
 import Checkout from "./components/checkout/Checkout";
-import { GlobalProvider } from "./context/GlobalState";
+import { Provider } from "react-redux";
+import store from "./redux/store";  
 
 const Layout = ({ children }) => (
   <div>
@@ -24,7 +25,7 @@ Layout.propTypes = {
 function App() {
   return (
     <div className="App">
-      <GlobalProvider>
+      <Provider store={store}>
         <BrowserRouter>
           <Routes>
             <Route
@@ -69,7 +70,7 @@ function App() {
             />
           </Routes>
         </BrowserRouter>
-      </GlobalProvider>
+      </Provider>
     </div>
   );
 }
